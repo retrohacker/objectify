@@ -1,0 +1,19 @@
+{
+  "name": "@retrohacker/objectify",
+  "version": "1.0.0",
+  "description": "Recursively convert an object with arrays to an object with objects",
+  "main": "index.js",
+  "repository": "github.com/retrohacker/objectify",
+  "author": "Will Blankenship <code@blankenship.io>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "pretest": "standard --fix",
+    "test": "nyc ava"
+  },
+  "devDependencies": {
+    "ava": "^2.1.0",
+    "nyc": "^14.1.1",
+    "standard": "^12.0.1"
+  }
+}
