@@ -1,6 +1,6 @@
 {
   "name": "@retrohacker/objectify",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Recursively convert an object with arrays to an object with objects",
   "main": "index.js",
   "repository": "github.com/retrohacker/objectify",
