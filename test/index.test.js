@@ -3,13 +3,9 @@
 const test = require('ava')
 const objectify = require('../index')
 
-test('should convert array to object', t => {
+test('should leave array of non-objects alone', t => {
   const obj = [1, 2, 3]
-  t.deepEqual(objectify(obj), {
-    '0': 1,
-    '1': 2,
-    '2': 3
-  })
+  t.deepEqual(objectify(obj), obj)
 })
 
 test('should leave non-arrays alone', t => {
@@ -22,32 +18,36 @@ test('should leave non-arrays alone', t => {
   t.deepEqual(objectify('hello'), 'hello')
 })
 
-test('should convert objects with arrays', t => {
+test('should leave objects with arrays of non-objects alone', t => {
   const obj = {
     'foo': [1, 2, 3],
     'bar': ['a', 'b', 'c']
   }
+  t.deepEqual(objectify(obj), obj)
+})
+
+test('should convert arrays of arrays of non-objects', t => {
+  const obj = [[1], [2]]
   t.deepEqual(objectify(obj), {
-    'foo': {
-      'foo_0': 1,
-      'foo_1': 2,
-      'foo_2': 3
-    },
-    'bar': {
-      'bar_0': 'a',
-      'bar_1': 'b',
-      'bar_2': 'c'
-    }
+    '0': [1],
+    '1': [2]
   })
 })
 
-test('should convert array of arrays', t => {
-  t.deepEqual(objectify([[1], [2]]), {
-    '0': {
-      '0_0': 1
-    },
-    '1': {
-      '1_0': 2
+test('should convert arrays of objects', t => {
+  const obj = [{ a: 1 }, { b: 2 }]
+  t.deepEqual(objectify(obj), {
+    '0': { a: 1 },
+    '1': { b: 2 }
+  })
+})
+
+test('should handle arrays that are nested', t => {
+  const obj = { 'foo': [{ a: 1 }, { b: 2 }] }
+  t.deepEqual(objectify(obj), {
+    'foo': {
+      'foo_0': { a: 1 },
+      'foo_1': { b: 2 }
     }
   })
 })

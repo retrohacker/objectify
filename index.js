@@ -1,10 +1,17 @@
 'use strict'
 
+const hasObj = (arr) => arr.reduce(
+  (acc, cur) => acc || (typeof cur === 'object'),
+  false)
+
 module.exports =
-// Recursively convert an object with arrays into an object with objects.
 // This makes it possible to index arrays in elasticsearch.
 function objectify (input, key = '') {
-  // If it is an array, turn the array into an object
+  // Leave arrays of non-objects alone
+  if (Array.isArray(input) && !hasObj(input)) {
+    return input.map(v => objectify(v))
+  }
+  // Convert arrays w/ objects into an elasticsearch friendly format
   if (Array.isArray(input)) {
     if (key.length > 0) {
       // Add seperator, otherwise nested arrays are ambigious

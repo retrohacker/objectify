@@ -13,44 +13,38 @@ yarn add @retrohacker/objectify
 
 ```js
 objectify({
-  'foo': [1, 2, 3],
-  'bar': ['a', 'b', 'c']
-})
+  'foo': [
+    { 'a': 1 },
+    { 'b': 2 }]
+  }
+)
 ```
 
-Yields
+yields
 
-```js  
+```js
 {
   'foo': {
-    'foo_0': 1,
-    'foo_1': 2,
-    'foo_2': 3
-  },
-  'bar': {
-    'bar_0': 'a',
-    'bar_1': 'b',
-    'bar_2': 'c'
+    'foo_0': { 'a': 1 },
+    'foo_1': { 'b': 2 }
   }
 }
 ```
 
-```js
-objectify([
-  [1],
-  [2]
-])
-```
-
-Yields
+and
 
 ```js
 {
-  '0': {
-    '0_0': 1
-  },
-  '1': {
-    '1_0': 2
-  }
+  'foo': [1, 2, 3],
+  'bar': ['a', 'b', 'c']
+}
+```
+
+yields
+
+```js
+{
+  'foo': [1, 2, 3],
+  'bar': ['a', 'b', 'c']
 }
 ```
